@@ -11,6 +11,7 @@
 #' @importFrom httr content
 #' @export
 #' @examples \dontrun{search_respose <- get_ops("https://ops.epo.org/3.2/rest-services/published-data/search/?q=ct%3D CN104980769 %20 and %20 pd %3D %22 20180201%2020180203%22", access_token, raw = FALSE)}
+
 get_ops <- function(url, access_token, raw = NULL, from_range = NULL, to_range = NULL){
   # Paste token to bearer. In this case it is possible to improve this function to decide the response,
   # either in xml or in json format.

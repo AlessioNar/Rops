@@ -15,6 +15,7 @@
 #' @export
 #' @examples \dontrun{urls <- get_quert(title = "pizza", applicant = "IBM", from = 2010, to = 2011)}
 
+
 get_query <- function(title = NA, abstract = NA, titab = NA, applicant = NA,
                           inventor = NA, citation = NA, pub_num = NA, cpc = NA, ipc = NA, from = NA, to = NA) {
 
@@ -53,6 +54,7 @@ get_query <- function(title = NA, abstract = NA, titab = NA, applicant = NA,
   }else{
     dates<-NA
   }
+
 
   query<-c(title, abstract, titab, applicant, inventor, citation, pub_num, cpc, ipc, dates)
 
