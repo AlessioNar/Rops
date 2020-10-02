@@ -7,9 +7,11 @@
 get_query(
   title = NA,
   abstract = NA,
+  titab = NA,
   applicant = NA,
   inventor = NA,
   citation = NA,
+  pub_num = NA,
   cpc = NA,
   ipc = NA,
   from = NA,
@@ -19,9 +21,11 @@ get_query(
 get_query(
   title = NA,
   abstract = NA,
+  titab = NA,
   applicant = NA,
   inventor = NA,
   citation = NA,
+  pub_num = NA,
   cpc = NA,
   ipc = NA,
   from = NA,
