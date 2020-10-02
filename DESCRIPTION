@@ -1,0 +1,13 @@
+Package: Rops
+Type: Package
+Title: API access to EPO OPS service
+Version: 0.1.0
+Author: AlNard
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: R interface to Open Patent Services data retrieval. 
+        It provides authentication and some basic functions
+License: GNU3
+Encoding: UTF-8
+LazyData: true
+Imports: httr, base64enc, jsonlite
+RoxygenNote: 7.1.1
