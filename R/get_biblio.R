@@ -2,7 +2,6 @@
 #'
 #' @description search for a patent
 #'
-<<<<<<< HEAD
 #' @param patent_id identification code of the patent. It can either be in the epodoc or docdb format
 #' @param id_type id type of the patent, it must be either epodoc or docdb
 #' @param access_token access token generated using the create_access_token function

@@ -4,7 +4,6 @@
 \alias{get_biblio}
 \title{Get patent bibliographic data}
 \usage{
-
 get_biblio(id, type, format, access_token, fromRange, toRange)
 }
 \arguments{

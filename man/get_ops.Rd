@@ -4,7 +4,6 @@
 \alias{get_ops}
 \title{Obtain a set of urls from ops_publications}
 \usage{
-
 get_ops(url, access_token, raw = NULL, from_range = NULL, to_range = NULL)
 }
 \arguments{
@@ -22,6 +21,5 @@ Used in conjunction with ops_iterate. Given a set of urls convert to a
 get request to retrieve the data from OPS. When the response is received extract the content to create a list.
 }
 \examples{
-
 \dontrun{search_respose <- get_ops("https://ops.epo.org/3.2/rest-services/published-data/search/?q=ct\%3D CN104980769 \%20 and \%20 pd \%3D \%22 20180201\%2020180203\%22", access_token, raw = FALSE)}
 }
