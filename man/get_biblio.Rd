@@ -4,12 +4,14 @@
 \alias{get_biblio}
 \title{Get patent bibliographic data}
 \usage{
-get_biblio(docdb_id, access_token)
+get_biblio(id, type, format, access_token, fromRange, toRange)
 }
 \arguments{
-\item{docdb_id}{docdb identification code of the patent}
-
 \item{access_token}{access token generated using the create_access_token function}
+
+\item{patent_id}{identification code of the patent. It can either be in the epodoc or docdb format}
+
+\item{id_type}{id type of the patent, it must be either epodoc or docdb}
 }
 \value{
 patent bibliographic information in json format

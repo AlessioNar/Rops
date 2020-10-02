@@ -46,7 +46,7 @@ if(response$status_code == 200){
 
 parsed_response<-fromJSON(content(response, "text"), flatten = TRUE)
 
-patent_biblio<-parse_patents(parsed_response, id)
+patent_biblio<-parse_biblio(parsed_response)
 
 }
 else{
@@ -54,8 +54,10 @@ else{
 }
 
 if(is.null(patent_biblio) == FALSE){
-  patent
+
 return(patent_biblio)
+} else {
+print("Request failed")
 }
 
 }

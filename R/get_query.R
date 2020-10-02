@@ -15,7 +15,7 @@
 #' @export
 #' @examples \dontrun{urls <- get_quert(title = "pizza", applicant = "IBM", from = 2010, to = 2011)}
 
-get_query <- function(title = NA, abstract = NA, applicant = NA,
+get_query <- function(title = NA, abstract = NA, titab = NA, applicant = NA,
                           inventor = NA, citation = NA, pub_num = NA, cpc = NA, ipc = NA, from = NA, to = NA) {
 
   baseurl <- "http://ops.epo.org/3.2/rest-services/published-data/search/biblio/?q="
@@ -25,6 +25,9 @@ get_query <- function(title = NA, abstract = NA, applicant = NA,
   }
   if(is.na(abstract) == FALSE){
     abstract <- paste0("ab=", abstract)
+  }
+  if(is.na(titab) == FALSE){
+    titab <- paste0("ta=", titab)
   }
   if(is.na(applicant) == FALSE){
     applicant <- paste0("pa=", applicant)
@@ -51,7 +54,7 @@ get_query <- function(title = NA, abstract = NA, applicant = NA,
     dates<-NA
   }
 
-  query<-c(title, abstract, applicant, inventor, citation, pub_num, cpc, ipc, dates)
+  query<-c(title, abstract, titab, applicant, inventor, citation, pub_num, cpc, ipc, dates)
 
   query<-query[!is.na(query)]
 
