@@ -4,7 +4,7 @@
 #' @param url . A single url or vector of urls
 #' @param response json list returned from get_ops function
 #' @return A list.
-#' @export parse_search
+#' @export parse_search_biblio
 #' @examples \dontrun{lapply(three_urls, ops_get)}
 #'
 parse_search_biblio <- function(response){

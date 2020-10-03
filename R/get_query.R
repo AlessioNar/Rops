@@ -25,30 +25,52 @@ get_query <- function(title = NA, abstract = NA, titab = NA, applicant = NA,
     baseurl <- "http://ops.epo.org/3.2/rest-services/published-data/search/?q="
   }
   if(is.na(title) == FALSE) {
+    if(length(title)> 1){
+      title <- paste(title, collapse = " or ")
+      title <- paste0("(", title,")")
+    }
     title <- paste0("ti=", title)
+
   }
   if(is.na(abstract) == FALSE){
+
+    if(length(abstract)> 1){
+    abstract <- paste(abstract, collapse = " or ")
+    abstract <- paste0("(", abstract,")")
+  }
     abstract <- paste0("ab=", abstract)
+
   }
   if(is.na(titab) == FALSE){
     if(length(titab) > 1){
       titab <- paste(titab, collapse = " or ")
       titab <- paste0("(", titab,")")
-      titab <- paste0("ta=", titab)
-    } else {
-      titab <- paste0("ta=", titab)
     }
+      titab <- paste0("ta=", titab)
+
   }
   if(is.na(applicant) == FALSE){
+    if(length(applicant) > 1){
+      applicant <- paste(applicant, collapse = " or ")
+      applicant <- paste0("(", applicant,")")
+    }
     applicant <- paste0("pa=", applicant)
   }
   if(is.na(inventor) == FALSE){
+    if(length(inventor) > 1){
+      inventor <- paste(inventor, collapse = " or ")
+      inventor <- paste0("(", inventor,")")
+    }
     inventor <- paste0("in=", inventor)
   }
   if(is.na(citation)== FALSE){
     citation <-paste0("ct=", citation)
   }
   if(is.na(pub_num) == FALSE){
+    if(length(pub_num) > 1){
+      pub_num <- paste(pub_num, collapse = " or ")
+      pub_num <- paste0("(", pub_num,")")
+    }
     pub_num <- paste0("pn=", pub_num)
   }
   if(is.na(cpc) == FALSE){
