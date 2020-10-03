@@ -2,23 +2,19 @@
 % Please edit documentation in R/parse_search.R
 \name{parse_search}
 \alias{parse_search}
-\title{Obtain a set of urls from ops_publications}
+\title{Parse json response into docdb codes of patents}
 \usage{
 parse_search(response)
 }
 \arguments{
-\item{response}{json list returned from get_ops function}
-
-\item{url}{. A single url or vector of urls}
+\item{response}{access token generated using the create_access_token function}
 }
 \value{
-A list.
+character vector containing docdb codes of query response
 }
 \description{
-Used in conjunction with ops_iterate. Given a set of urls convert to a
-get request to retrieve the data from OPS. When the response is received extract the content to create a list.
+Parse json response into docdb codes of patents
 }
 \examples{
-\dontrun{lapply(three_urls, ops_get)}
-
+\dontrun{parse_search(response)}
 }

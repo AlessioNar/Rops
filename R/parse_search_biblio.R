@@ -7,7 +7,7 @@
 #' @export parse_search
 #' @examples \dontrun{lapply(three_urls, ops_get)}
 #'
-parse_search <- function(response){
+parse_search_biblio <- function(response){
 
   tot_results<- response[["ops:world-patent-data"]][["ops:biblio-search"]][["@total-result-count"]]
 
