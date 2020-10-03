@@ -15,7 +15,9 @@ get_query(
   cpc = NA,
   ipc = NA,
   from = NA,
-  to = NA
+  to = NA,
+  merge_classification = FALSE,
+  with_biblio = FALSE
 )
 
 get_query(
@@ -29,7 +31,9 @@ get_query(
   cpc = NA,
   ipc = NA,
   from = NA,
-  to = NA
+  to = NA,
+  merge_classification = FALSE,
+  with_biblio = FALSE
 )
 }
 \arguments{
