@@ -42,6 +42,8 @@ parse_biblio<- function(response){
   #store publication date
   publication_date<- unlist(lapply(publication_list, function(x) unlist(min(x$`date.$`, na.rm = TRUE))))
 
+  pub_doc_epo <- lapply(publication_list, function(x) x$`doc-number.$`[x$`@document-id-type` == "epodoc"])
+
   #extract epodoc information dataframe
   epodoc_id <- lapply(publication_list, function(x) x$`doc-number.$`[[2]])
 
@@ -49,8 +51,12 @@ parse_biblio<- function(response){
   application_list<-response[["ops:world-patent-data"]][["exchange-documents"]][["exchange-document"]][["bibliographic-data.application-reference.document-id"]]
   #store application date
   application_date<- unlist(lapply(application_list, function(x) min(x$`date.$`, na.rm = TRUE)))
+  app_doc_epo <- lapply(application_list, function(x) x$`doc-number.$`[x$`@document-id-type` == "epodoc"])
+  app_doc_ori <- lapply(application_list, function(x) x$`doc-number.$`[x$`@document-id-type` == "original"])
 
-  #IPC class, titles, and abstracts are in a strange format (some are stored as lists and some as dataframes)
+  priority_list<- response[["ops:world-patent-data"]][["exchange-documents"]][["exchange-document"]][["bibliographic-data.priority-claims.priority-claim.document-id"]]
+  priority_date <- lapply(priority_list, function(x) x$`date.$`[x$`@document-id-type` == "epodoc"])
+  priority_doc <- lapply(priority_list, function(x) x$`doc-number.$`[x$`@document-id-type` == "epodoc"])
 
   #create list containing titles
   title_list<-response[["ops:world-patent-data"]][["exchange-documents"]][["exchange-document"]][["bibliographic-data.invention-title"]]
@@ -84,12 +90,6 @@ parse_biblio<- function(response){
   #store english abstracts
   abstract_en <- lapply(abstract_list, function(x) extract_abstracts(x))
 
-  #priority_date_info<-some_patents[["ops:world-patent-data"]][["exchange-documents"]][["exchange-document"]][["bibliographic-data.priority-claims.priority-claim"]]
-  #lapply(priority_date_info, extract_priority_date(x))
-  #idea: some of the contents are stored as dataframes and others as simple lists. I should
-  #put an if condition into a lapply to evaluate when it is more appropriate to
-  #is.data.frame(priority_date[[1]])
-
   #create list containing IPC classification
   IPC_list<-response[["ops:world-patent-data"]][["exchange-documents"]][["exchange-document"]][["bibliographic-data.classifications-ipcr.classification-ipcr"]]
   #create temporary function
@@ -106,10 +106,27 @@ parse_biblio<- function(response){
   #store IPC classification
   IPC_class <- lapply(IPC_list, function(x) extract_IPC(x))
 
+  CPC_list <- response[["ops:world-patent-data"]][["exchange-documents"]][["exchange-document"]][["bibliographic-data.patent-classifications.patent-classification"]]
+  extract_CPC<- function(dataframe){
+    section<- dataframe$`section.$`
+    class<- dataframe$`class.$`
+    subclass<- dataframe$`subclass.$`
+    main_group<- dataframe$`main-group.$`
+    subgroup<- dataframe$`subgroup.$`
+    CPC_class <- paste0(section, class, subclass, main_group, "/", subgroup)
+    return(CPC_class)
+  }
+  CPC_class<- lapply(CPC_list, function(x) extract_CPC(x))
+
+
   biblio_df <- as.data.frame(cbind(docdb_id, epodoc_id, family_id, title_en, abs_en = abstract_en, app_epo = applicants_epodoc,
                                    app_ori = applicants_original, inv_epo = inventors_epodoc, inv_ori = inventors_original,
-                                   pub_date = publication_date, app_date = application_date, IPC = IPC_class,
+                                   pub_date = publication_date, pub_doc_epo = pub_doc_epo, app_date = application_date,
+                                   app_doc_epo = app_doc_epo, app_doc_ori = app_doc_ori, pri_date = priority_date,
+                                   pri_doc_epo = priority_doc, IPC = IPC_class, CPC = CPC_class,
                                    country))
+
+
 
   return(biblio_df)
 }
