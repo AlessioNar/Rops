@@ -104,7 +104,7 @@ parse_biblio<- function(response){
   }
 
   #store IPC classification
-  IPC_class <- lapply(IPC_class_info, function(x) extract_IPC(x))
+  IPC_class <- lapply(IPC_list, function(x) extract_IPC(x))
 
   biblio_df <- as.data.frame(cbind(docdb_id, epodoc_id, family_id, title_en, abs_en = abstract_en, app_epo = applicants_epodoc,
                                    app_ori = applicants_original, inv_epo = inventors_epodoc, inv_ori = inventors_original,
