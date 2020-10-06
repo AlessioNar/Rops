@@ -1,10 +1,11 @@
 #' @title Generate access token
 #'
-#' @description Generation of access token for OPS authentication
+#' @description Generation of access token for OPS authentication. The access token expires every 20 minutes.
 #'
-#' @param consumer_key Alphanumeric provided by OPS
+#' @param consumer_key Alphanumeric consumer key provided by OPS
 #' @param consumer_secret_key Alphanumeric secret provided by OPS
-#' @return The access token
+#'
+#' @return Access token in a string format
 #'
 #' @examples \dontrun{create_access_token(consumer_key, consumer_secret_key)}
 #'
@@ -23,7 +24,7 @@ create_access_token<-function(consumer_key, consumer_secret_key){
   names(heads) <- c('Authorization', 'content-type')
   #authenticate
   auth <- httr::POST(url = 'https://ops.epo.org/3.2/auth/accesstoken',  #READ BELOW
-               add_headers(heads), body = 'grant_type=client_credentials')
+               httr::add_headers(heads), body = 'grant_type=client_credentials')
   #extract access token
   access_token<-as.list(content(auth))[[9]]
 

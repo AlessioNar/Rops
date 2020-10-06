@@ -2,23 +2,25 @@
 % Please edit documentation in R/get_description.R
 \name{get_description}
 \alias{get_description}
-\title{Get description}
+\title{Get patent description}
 \usage{
-get_description(epodoc, access_token)
+get_description(epodoc_id, type, access_token)
 }
 \arguments{
-\item{epodoc}{epodoc identification code}
+\item{epodoc_id}{epodoc identification code}
+
+\item{type}{the type of publication to be searched. 'pub' stands for patent publications and 'app' stands for patent applications.}
 
 \item{access_token}{token for authentication}
 }
 \value{
-despcription contained in the patent
+Character vector containing patent description
 }
 \description{
 Retrieve patent description based on epodoc identification code
 }
 \examples{
-\dontrun{get_description(epodoc, access_token))}
+\dontrun{get_description(epodoc, type = 'pub', access_token)}
 
 
 }

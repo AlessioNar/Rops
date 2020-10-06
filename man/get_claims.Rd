@@ -2,23 +2,24 @@
 % Please edit documentation in R/get_claims.R
 \name{get_claims}
 \alias{get_claims}
-\title{Get claims}
+\title{Get claims from OPS API}
 \usage{
-get_claims(epodoc, access_token)
+get_claims(epodoc_id, type = NA, access_token)
 }
 \arguments{
-\item{epodoc}{epodoc code for a patent to have returned the claims}
+\item{epodoc_id}{epodoc code for a patent to have returned the claims}
+
+\item{type}{the type of publication to be searched. 'pub' stands for patent publications and 'app' stands for patent applications.}
 
 \item{access_token}{token for authentications}
 }
 \value{
-claims contained in the patent as a list
+A character vector
 }
 \description{
 Retrieve claims of a patent. It works only with the epodoc format
 }
 \examples{
-\dontrun{get_claims(epodoc, access_token))}
-
+\dontrun{get_claims(epodoc_id, type = 'pub', access_token))}
 
 }

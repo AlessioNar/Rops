@@ -1,22 +1,32 @@
-#' @title Get description
+#' @title Get patent description
 #'
 #' @description Retrieve patent description based on epodoc identification code
 #'
-#' @param epodoc epodoc identification code
+#' @param epodoc_id epodoc identification code
 #' @param access_token token for authentication
-#' @return despcription contained in the patent
+#' @param type the type of publication to be searched. 'pub' stands for patent publications and 'app' stands for patent applications.
+#' @return Character vector containing patent description
 #'
-#' @examples \dontrun{get_description(epodoc, access_token))}
+#' @examples \dontrun{get_description(epodoc_id, type = 'pub', access_token)}
 #'
 #'
 
-#' @export description
+#' @export get_description
 
-get_description<-function(epodoc, access_token){
+get_description<-function(epodoc_id, type, access_token){
   header <- c(paste('Bearer', access_token), "application/json")
   names(header) <- c('Authorization', "Accept")
-  request<-paste("http://ops.epo.org/3.2/rest-services/published-data/publication/epodoc/", epodoc, "/description",
-                 collapse = "", sep = "")
+  baseURL <- "https://ops.epo.org/3.2/rest-services/published-data/"
+
+  if(type == "pub"){
+    url <- paste0(baseURL, "publication/epodoc/")
+  }
+
+  if(type == "app"){
+    url <- paste0(baseURL, "application/epodoc/")
+  }
+
+  request<-paste0(url, epodoc_id, "/description")
 
   response<-GET(request,
                 add_headers(header))

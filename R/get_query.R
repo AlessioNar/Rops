@@ -1,18 +1,21 @@
-#' @title Generate URLs to search OPS biblios
+#' @title Generate urls to be fed into get_ops function
 #'
-#' @param title - character
-#' @param abstract - character
-#' @param applicant  - character
-#' @param inventor - character
-#' @param citation - character
-#' @param cpc - character
-#' @param ipc - character
+#' @param title - Character vector containing string to be searched in the title field
+#' @param abstract - Character vector containing string to be searched in the abstract field
+#' @param titab - Character vector containing string to be searched in the title or abstract field
+#' @param applicant  - Character vector containing string to be searched in the applicant field
+#' @param inventor - Character vector containing string to be searched in the inventor field
+#' @param citation - Character vector containing DOCDB identification to be searched in the citation field
+#' @param pub_num - Character vector containing publication number. It can also be used to search patents granted by a specific patent authority, using their country code
+#' @param cpc - Character vector containing Cooperative Patent Classification code
+#' @param ipc - Character vector containing International Patent Classification code
 #' @param from - YYYY or YYYYMMDD, publication date.
 #' @param to - YYYY or YYYYMMDD, publication date
-#'
-#' @return prints a query that is ready to be used in the Publication Data Keyword Search endpoint
-#' @details This function generates a set of URLs with a maximum of 100 results per URL for searching either OPS titles, titles & abstracts, biblios (default) and/or date ranges (publication date). See Details.
-#' @export
+#' @param merge_classification - Boolean. If TRUE, links the ipc and cpc fields with AND, if FALSE, it links them with OR
+#' @param with_biblio - Boolean. If true, the results returns with bibliographic information attached
+#' @return url
+#' @details This function returns queries that can be provided as inputs to the get_ops function. Remember that the ops accepts only queries made of maximum 20 components or 10 components per field.
+#' @export get_query
 #' @examples \dontrun{urls <- get_quert(title = "pizza", applicant = "IBM", from = 2010, to = 2011)}
 
 

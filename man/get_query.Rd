@@ -37,38 +37,46 @@ get_query(
 )
 }
 \arguments{
-\item{title}{- character}
+\item{title}{- Character vector containing string to be searched in the title field}
 
-\item{abstract}{- character}
+\item{abstract}{- Character vector containing string to be searched in the abstract field}
 
-\item{applicant}{- character}
+\item{titab}{- Character vector containing string to be searched in the title or abstract field}
 
-\item{inventor}{- character}
+\item{applicant}{- Character vector containing string to be searched in the applicant field}
 
-\item{citation}{- character}
+\item{inventor}{- Character vector containing string to be searched in the inventor field}
 
-\item{cpc}{- character}
+\item{citation}{- Character vector containing DOCDB identification to be searched in the citation field}
 
-\item{ipc}{- character}
+\item{pub_num}{- Character vector containing publication number. It can also be used to search patents granted by a specific patent authority, using their country code}
+
+\item{cpc}{- Character vector containing Cooperative Patent Classification code}
+
+\item{ipc}{- Character vector containing International Patent Classification code}
 
 \item{from}{- YYYY or YYYYMMDD, publication date.}
 
 \item{to}{- YYYY or YYYYMMDD, publication date}
+
+\item{merge_classification}{- Boolean. If TRUE, links the ipc and cpc fields with AND, if FALSE, it links them with OR}
+
+\item{with_biblio}{- Boolean. If true, the results returns with bibliographic information attached}
 }
 \value{
 prints a query that is ready to be used in the Publication Data Keyword Search endpoint
 
-prints a query that is ready to be used in the Publication Data Keyword Search endpoint
+url
 }
 \description{
 Generate URLs to search OPS biblios
 
-Generate URLs to search OPS biblios
+Generate urls to be fed into get_ops function
 }
 \details{
 This function generates a set of URLs with a maximum of 100 results per URL for searching either OPS titles, titles & abstracts, biblios (default) and/or date ranges (publication date). See Details.
 
-This function generates a set of URLs with a maximum of 100 results per URL for searching either OPS titles, titles & abstracts, biblios (default) and/or date ranges (publication date). See Details.
+This function returns queries that can be provided as inputs to the get_ops function. Remember that the ops accepts only queries made of maximum 20 components or 10 components per field.
 }
 \examples{
 \dontrun{urls <- get_query(title = "pizza", applicant = "IBM", from = 2010, to = 2011)}

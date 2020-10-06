@@ -3,7 +3,7 @@ Type: Package
 Title: API access to EPO OPS service
 Version: 0.1.0
 Author: AlNard
-Maintainer: The package maintainer <yourself@somewhere.net>
+Maintainer: The package maintainer <alessio.nardin@gmail.com>
 Description: R interface to Open Patent Services data retrieval. 
         It provides authentication and some basic functions
 License: GNU3
