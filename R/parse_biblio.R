@@ -59,7 +59,7 @@ parse_biblio<- function(response){
   priority_doc <- lapply(priority_list, function(x) x$`doc-number.$`[x$`@document-id-type` == "epodoc"])
 
   #create list containing titles
-  title_list<-response[["ops:world-patent-data"]][["exchange-documents"]][["exchange-document"]][["bibliographic-data.invention-title"]]
+  title_list<-parsed_response[["ops:world-patent-data"]][["exchange-documents"]][["exchange-document"]][["bibliographic-data.invention-title"]]
 
   if(is.null(title_list) == FALSE){
 
