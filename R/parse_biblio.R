@@ -59,20 +59,25 @@ parse_biblio<- function(response){
   priority_doc <- lapply(priority_list, function(x) x$`doc-number.$`[x$`@document-id-type` == "epodoc"])
 
   #create list containing titles
-  title_list<-response[["ops:world-patent-data"]][["exchange-documents"]][["exchange-document"]][["bibliographic-data.invention-title"]]
+  title_list<-parsed_response[["ops:world-patent-data"]][["exchange-documents"]][["exchange-document"]][["bibliographic-data.invention-title"]]
 
-  #create temporary function
-  extract_titles<- function(x){
-    if(is.data.frame(x) == FALSE){
-      title <- as.data.frame(t(as.data.frame(unlist(x))))$`$`
+  if(is.null(title_list) == FALSE){
 
-    } else {
-      title <- x$`$`[which(x$`@lang`== "en")]
+    #create temporary function
+    extract_titles<- function(x){
+      if(is.data.frame(x) == FALSE){
+        title <- as.data.frame(t(as.data.frame(unlist(x))))$`$`
+
+      } else {
+        title <- x$`$`[which(x$`@lang`== "en")]
+      }
+      return(title)
     }
-    return(title)
+    #store english titles
+    title_en <- lapply(title_list, function(x) extract_titles(x))
+  } else{
+    title_en <- response[["ops:world-patent-data"]][["exchange-documents"]][["exchange-document"]][["bibliographic-data.invention-title.$"]]
   }
-  #store english titles
-  title_en <- lapply(title_list, function(x) extract_titles(x))
 
   #create list containing abstracts
   abstract_list<-response[["ops:world-patent-data"]][["exchange-documents"]][["exchange-document"]][["abstract"]]
