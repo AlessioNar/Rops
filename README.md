@@ -14,6 +14,8 @@ https://www.epo.org/searching-for-patents/data/web-services/ops.html.
 
 Then use the create_access_token function to retrieve an access token that is valid for 20 minutes. 
 
+## Retrieve bibliographic information
+
 
 
 

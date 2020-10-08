@@ -12,7 +12,16 @@
 parse_search <- function(response){
 
         results<- response$`ops:world-patent-data`$`ops:biblio-search`$`ops:search-result`$`ops:publication-reference`
+        if(response$`ops:world-patent-data`$`ops:biblio-search`$`@total-result-count` == 1){
 
+                country <- results$`document-id`$country$`$`
+
+                doc_number <- results$`document-id`$`doc-number`$`$`
+
+                kind <- results$`document-id`$`kind`$`$`
+
+                docdb_id<- paste0(country, doc_number, kind)
+        } else {
         country <- lapply(results, function(x) x$`document-id`$country$`$`)
 
         doc_number <- lapply(results, function(x) x$`document-id`$`doc-number`$`$`)
@@ -20,6 +29,6 @@ parse_search <- function(response){
         kind <- lapply(results, function(x) x$`document-id`$`kind`$`$`)
 
         docdb_id<- paste0(country, doc_number, kind)
-
+}
         return(docdb_id)
 }
