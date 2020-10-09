@@ -4,7 +4,7 @@
 #' @param access_token access token received after authentication
 #' @return
 #' @export get_result_number
-#' @examples \dontrun{lapply(three_urls, ops_get)}
+#' @examples \dontrun{get_result_number(query, access_token)}
 #'
 
 get_result_number<- function(query, access_token){

@@ -1,14 +1,13 @@
 #' @title Parse json data returned from the biblio endpoint into dataframe
-#' @description Given a json list after fromJSON() function of the jsonlite package, it returns a dataframe conteining some bibliographic patent data in an orderly manner
-#' it works only with results in multiple entries. Not stable, as the OPS is still developing, this method needs to be improved.
-#' @param response . A single url or vector of urls
+#' @description Given a json list after fromJSON() function of the jsonlite package, it returns a dataframe conteining some bibliographic patent data in an orderly manner. Tt works only with results in multiple entries. Not stable, as the OPS is still developing, this method needs to be improved.
+#' @param response A single url or vector of urls
 #' @return A list.
 #' @importFrom httr GET
 #' @importFrom httr content_type
 #' @importFrom httr accept
 #' @importFrom httr content
-#' @export
-#' @examples \dontrun{lapply(three_urls, ops_get)}
+#' @export parse_biblio
+#' @examples \dontrun{parse_biblio(response)}
 
 parse_biblio<- function(response){
 
