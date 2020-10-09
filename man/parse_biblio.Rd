@@ -7,15 +7,14 @@
 parse_biblio(response)
 }
 \arguments{
-\item{response}{. A single url or vector of urls}
+\item{response}{A single url or vector of urls}
 }
 \value{
 A list.
 }
 \description{
-Given a json list after fromJSON() function of the jsonlite package, it returns a dataframe conteining some bibliographic patent data in an orderly manner
-it works only with results in multiple entries. Not stable, as the OPS is still developing, this method needs to be improved.
+Given a json list after fromJSON() function of the jsonlite package, it returns a dataframe conteining some bibliographic patent data in an orderly manner. Tt works only with results in multiple entries. Not stable, as the OPS is still developing, this method needs to be improved.
 }
 \examples{
-\dontrun{lapply(three_urls, ops_get)}
+\dontrun{parse_biblio(response)}
 }

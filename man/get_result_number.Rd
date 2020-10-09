@@ -18,6 +18,6 @@ get_result_number(query, access_token)
 This is a memory efficient way to count the number of results of a single query. Whenever it returns 10000, it means that the number of results are 10000 or higher
 }
 \examples{
-\dontrun{lapply(three_urls, ops_get)}
+\dontrun{get_result_number(query, access_token)}
 
 }

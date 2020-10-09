@@ -1,11 +1,9 @@
-#' @title Obtain a set of urls from ops_publications
-#' @description Used in conjunction with ops_iterate. Given a set of urls convert to a
-#' get request to retrieve the data from OPS. When the response is received extract the content to create a list.
-#' @param url . A single url or vector of urls
+#' @title Parse search response with attached biblio
+#' @description This function transforms the response obtained by the GET request to the OPS into a dataframe containing the search results.
 #' @param response json list returned from get_ops function
-#' @return A list.
+#' @return A dataframe containing the search results
 #' @export parse_search_biblio
-#' @examples \dontrun{lapply(three_urls, ops_get)}
+#' @examples \dontrun{parse_search_biblio(response)}
 #'
 parse_search_biblio <- function(response){
 

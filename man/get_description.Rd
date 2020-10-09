@@ -20,7 +20,7 @@ Character vector containing patent description
 Retrieve patent description based on epodoc identification code
 }
 \examples{
-\dontrun{get_description(epodoc, type = 'pub', access_token)}
+\dontrun{get_description(epodoc_id, type = 'pub', access_token)}
 
 
 }

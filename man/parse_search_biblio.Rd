@@ -2,23 +2,20 @@
 % Please edit documentation in R/parse_search_biblio.R
 \name{parse_search_biblio}
 \alias{parse_search_biblio}
-\title{Obtain a set of urls from ops_publications}
+\title{Parse search response with attached biblio}
 \usage{
 parse_search_biblio(response)
 }
 \arguments{
 \item{response}{json list returned from get_ops function}
-
-\item{url}{. A single url or vector of urls}
 }
 \value{
-A list.
+A dataframe containing the search results
 }
 \description{
-Used in conjunction with ops_iterate. Given a set of urls convert to a
-get request to retrieve the data from OPS. When the response is received extract the content to create a list.
+This function transforms the response obtained by the GET request to the OPS into a dataframe containing the search results.
 }
 \examples{
-\dontrun{lapply(three_urls, ops_get)}
+\dontrun{parse_search_biblio(response)}
 
 }
