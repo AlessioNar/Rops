@@ -48,16 +48,31 @@ if(response$status_code == 200){
 
 parsed_response<-fromJSON(content(response, "text"), flatten = TRUE)
 
-#patent_biblio<-parse_biblio(parsed_response)
+patent_biblio<-parse_biblio(parsed_response)
+
+abstract_list<-parsed_response[["ops:world-patent-data"]][["exchange-documents"]][["exchange-document"]][["abstract"]]
+
+#create temporary function
+extract_abstracts<- function(x){
+  if(is.data.frame(x) == FALSE){
+    abstract <- as.data.frame(t(as.data.frame(unlist(x))))$`p.$`
+
+  } else {
+    abstract <- x$`p.$`[which(x$`@lang`== "en")]
+  }
+  return(abstract)
+}
+#store english abstracts
+abstract_en <- lapply(abstract_list, function(x) extract_abstracts(x))
 
 }
 else{
   print(paste("Failed request, error", response$status_code))
 }
 
-if(is.null(patent_biblio) == FALSE){
+if(is.null(parsed_response) == FALSE){
 
-return(abstract)
+return(abstract_en)
 } else {
 print("Request failed")
 }
