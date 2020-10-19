@@ -48,8 +48,6 @@ if(response$status_code == 200){
 
 parsed_response<-fromJSON(content(response, "text"), flatten = TRUE)
 
-patent_biblio<-parse_biblio(parsed_response)
-
 abstract_list<-parsed_response[["ops:world-patent-data"]][["exchange-documents"]][["exchange-document"]][["abstract"]]
 
 #create temporary function
