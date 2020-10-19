@@ -13,11 +13,11 @@
 #'
 #' @import httr
 #' @import jsonlite
-#' @export get_biblio
+#' @export get_abstract
 #'
 #'
 
-get_biblio<-function(id, type, format, access_token, fromRange = 1, toRange = 100){
+get_abstract<-function(id, type, format, access_token, fromRange = 1, toRange = 100){
 
   baseURL <- "http://ops.epo.org/3.2/rest-services/published-data/"
   if(type == "pub"){
