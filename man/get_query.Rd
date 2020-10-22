@@ -16,7 +16,6 @@ get_query(
   ipc = NA,
   from = NA,
   to = NA,
-  merge_classification = FALSE,
   with_biblio = FALSE
 )
 
@@ -32,7 +31,6 @@ get_query(
   ipc = NA,
   from = NA,
   to = NA,
-  merge_classification = FALSE,
   with_biblio = FALSE
 )
 }

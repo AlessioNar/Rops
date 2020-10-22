@@ -20,7 +20,7 @@
 
 get_query <- function(title = NA, abstract = NA, titab = NA, applicant = NA,
                       inventor = NA, citation = NA, pub_num = NA, cpc = NA, ipc = NA, from = NA, to = NA,
-                      merge_classification = FALSE, with_biblio = FALSE) {
+                      with_biblio = FALSE) {
 
   # Evaluate whether to retrieve search results with bibliographic data attached
   if(with_biblio == TRUE){
