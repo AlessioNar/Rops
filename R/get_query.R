@@ -11,23 +11,27 @@
 #' @param ipc - Character vector containing International Patent Classification code
 #' @param from - YYYY or YYYYMMDD, publication date.
 #' @param to - YYYY or YYYYMMDD, publication date
-#' @param merge_classification - Boolean. If TRUE, links the ipc and cpc fields with AND, if FALSE, it links them with OR
 #' @param with_biblio - Boolean. If true, the results returns with bibliographic information attached
 #' @return url
 #' @details This function returns queries that can be provided as inputs to the get_ops function. Remember that the ops accepts only queries made of maximum 20 components or 10 components per field.
 #' @export get_query
-#' @examples \dontrun{urls <- get_quert(title = "pizza", applicant = "IBM", from = 2010, to = 2011)}
+#' @examples \dontrun{urls <- get_query(title = "pizza", applicant = "IBM", from = 2010, to = 2011)}
 
 
 get_query <- function(title = NA, abstract = NA, titab = NA, applicant = NA,
                       inventor = NA, citation = NA, pub_num = NA, cpc = NA, ipc = NA, from = NA, to = NA,
                       merge_classification = FALSE, with_biblio = FALSE) {
+
+  # Evaluate whether to retrieve search results with bibliographic data attached
   if(with_biblio == TRUE){
     baseurl <- "http://ops.epo.org/3.2/rest-services/published-data/search/biblio/?q="
   } else {
     baseurl <- "http://ops.epo.org/3.2/rest-services/published-data/search/?q="
   }
+
+  # Series of if clause that build the query
   if(is.na(title) == FALSE) {
+    # Evaluate whether to search for multiple values
     if(length(title)> 1){
       title <- paste(title, collapse = " or ")
       title <- paste0("(", title,")")
@@ -35,16 +39,20 @@ get_query <- function(title = NA, abstract = NA, titab = NA, applicant = NA,
     title <- paste0("ti=", title)
 
   }
+
   if(is.na(abstract) == FALSE){
 
     if(length(abstract)> 1){
-    abstract <- paste(abstract, collapse = " or ")
-    abstract <- paste0("(", abstract,")")
+
+      abstract <- paste(abstract, collapse = " or ")
+      abstract <- paste0("(", abstract,")")
   }
     abstract <- paste0("ab=", abstract)
 
   }
+  # Title and abstract
   if(is.na(titab) == FALSE){
+
     if(length(titab) > 1){
       titab <- paste(titab, collapse = " or ")
       titab <- paste0("(", titab,")")
@@ -102,24 +110,21 @@ get_query <- function(title = NA, abstract = NA, titab = NA, applicant = NA,
     dates<-NA
   }
 
-  if(merge_classification == TRUE){
-    class <- paste(cpc, ipc, sep = " or ")
-    class <- paste0("(", class, ")")
-    query<-c(title, abstract, titab, applicant, inventor, citation, pub_num, dates, class)
-  } else {
-    query<-c(title, abstract, titab, applicant, inventor, citation, pub_num, dates, cpc, ipc)
-  }
+  # Paste query
+  query<-c(title, abstract, titab, applicant, inventor, citation, pub_num, dates, cpc, ipc)
 
+  # Remove NA values
   query<-query[!is.na(query)]
 
+  # Paste query together
   query<-paste0(query, collapse = " and ")
 
+  # Convert special characters to CQL format
   query<-gsub("=", "%3D", query)
-
   query<-gsub(" ", "%20", query)
-
   query <- gsub("/", "%2F", query)
 
+  # Paste query to url
   url<-paste0(baseurl, query)
 
   return(url)

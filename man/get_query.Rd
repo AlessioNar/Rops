@@ -59,8 +59,6 @@ get_query(
 
 \item{to}{- YYYY or YYYYMMDD, publication date}
 
-\item{merge_classification}{- Boolean. If TRUE, links the ipc and cpc fields with AND, if FALSE, it links them with OR}
-
 \item{with_biblio}{- Boolean. If true, the results returns with bibliographic information attached}
 }
 \value{
@@ -80,5 +78,5 @@ This function returns queries that can be provided as inputs to the get_ops func
 }
 \examples{
 \dontrun{urls <- get_query(title = "pizza", applicant = "IBM", from = 2010, to = 2011)}
-\dontrun{urls <- get_quert(title = "pizza", applicant = "IBM", from = 2010, to = 2011)}
+\dontrun{urls <- get_query(title = "pizza", applicant = "IBM", from = 2010, to = 2011)}
 }
