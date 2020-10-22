@@ -16,7 +16,7 @@ get_abstract(id, type, format, access_token, fromRange = 1, toRange = 100)
 \item{patent_id}{identification code of the patent. It can either be in the epodoc or docdb format}
 }
 \value{
-patent bibliographic information in json format
+patent bibliographic information as dataframe
 }
 \description{
 Retrieves up to 100 patent abstracts through the epodoc or docdb id
