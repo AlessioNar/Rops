@@ -4,14 +4,18 @@
 \alias{get_ops}
 \title{Obtain a set of urls from ops_publications}
 \usage{
-get_ops(url, access_token, raw = NULL, from_range = NULL, to_range = NULL)
+get_ops(url, access_token, raw = NULL, from_range = 1, to_range = 100)
 }
 \arguments{
 \item{url}{. A single url}
 
 \item{access_token}{bearer token for authentication}
 
-\item{raw}{boolean value to}
+\item{raw}{boolean value that decides whether the returned file will be in json format or as a list}
+
+\item{from_range}{Initial limit of results to be returned. Default to 1}
+
+\item{to_range}{Final limit of results to be returned. Default to 100}
 }
 \value{
 A list containing a parse
