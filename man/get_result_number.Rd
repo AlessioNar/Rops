@@ -12,7 +12,7 @@ get_result_number(query, access_token)
 \item{access_token}{access token received after authentication}
 }
 \value{
-
+Number of results
 }
 \description{
 This is a memory efficient way to count the number of results of a single query. Whenever it returns 10000, it means that the number of results are 10000 or higher
