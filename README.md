@@ -1,7 +1,7 @@
 # Rops
 R client to download EPO OPS data. The package is still in development and I am open to collaborations to improve its functionalities. 
 
-At present it presents four basic functions:
+The main functions are:
 
 - get_biblio: retrieves bibliographic data of patents in the form of dataframes given the epodoc/docdb id of the patent
 - get_claims: retrieves claims of a patent given the epodoc id
@@ -9,6 +9,7 @@ At present it presents four basic functions:
 - search_patents: searches for patents within the EPO dataset. At present it allows to retrieve only the docdb code of the patents matching those criterias. However, I am encountering issues with the parse_search_biblio that should allow to parse the bibliographic infromation. 
 - get_query: builds a query to search the EPO datasets based on various criteria. See documentation for more information
 
+In the next months I plan on adding a function to retrieve the Inpadoc family, and patent equivalents through the corresponding endpoints. 
 
 ## Authentication process
 Accessing the OPS API requires applying for an account to obtain the consumer key and the consumer secret key. In order to register for the service, register at
