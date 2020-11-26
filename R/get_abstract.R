@@ -53,7 +53,7 @@ get_abstract<-function(id, type, format, access_token, fromRange = 1, toRange = 
 }
 
 # Make request
-response<-get_ops(url, access_token, raw = TRUE, from_range = fromRange, to_range = toRange)
+response<-get_ops(url, access_token, raw = TRUE, fromRange = fromRange, toRange = toRange)
 
 
 if(response$status_code == 200){
