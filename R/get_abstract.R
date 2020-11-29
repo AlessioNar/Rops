@@ -64,6 +64,8 @@ if(response$status_code == 200){
   # Store the number of documents
   documents <- parsed_response[["ops:world-patent-data"]][["exchange-documents"]][["exchange-document"]]
 
+  if (format == 'docdb'){
+
   #store country
   country <- documents$`@country`
 
@@ -75,6 +77,10 @@ if(response$status_code == 200){
 
   #create docdb_id
   docdb_id <- paste0(country, doc_number, kind)
+  }
+  if (format == 'epodoc'){
+    epodoc_id <- lapply(documents$`bibliographic-data.publication-reference.document-id`, function(x) x$`doc-number.$`[2])
+  }
 
   # Store abstract list
   abstract_list<-parsed_response[["ops:world-patent-data"]][["exchange-documents"]][["exchange-document"]][["abstract"]]
@@ -102,8 +108,14 @@ if(response$status_code == 200){
   # Set the null items in the list as NA
   abstract_en[sapply(abstract_en, is.null)] <- NA
 
-  # Create dataframe to be returned
-  abstracts <- data.frame(docdb_id = docdb_id, abstract = unlist(abstract_en))
+  if (format == 'docdb'){
+    # Create dataframe to be returned
+    abstracts <- data.frame(docdb_id = docdb_id, abstract = unlist(abstract_en))
+
+  }
+  if (format == 'epodoc'){
+    abstracts <- data.frame(epodoc_id = unlist(epodoc_id), abstract = unlist(abstract_en))
+  }
 
   } else {
     # Print error number
