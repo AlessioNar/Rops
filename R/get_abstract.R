@@ -1,12 +1,12 @@
 #' @title Get patent abstract
 #'
-#' @description Retrieves up to 100 patent abstracts through the epodoc or docdb id
+#' @description Retrieves up to 100 patent abstracts through the EPODOC or DOCDB identification number
 #'
-#' @param patent_id identification code of the patent. It can either be in the epodoc or docdb format
-#' @param type publication or application (pub or app)
+#' @param patent_id character or character vector, identification code of the patent. It can either be in the EPODOC or DOCDB format, provided that it is specified in the format argument
+#' @param type character, indicate whether to retrieve the patent publication or application (pub or app)
 #' @param format id type of the patent, it must be either epodoc or docdb
 #' @param access_token access token generated using the create_access_token function
-#' @return patent bibliographic information as dataframe
+#' @return dataframe containing patent bibliographic information
 #'
 #' @examples \dontrun{search_patent(docdb_id, access_token))}
 #'
@@ -17,23 +17,28 @@
 #'
 #'
 
-get_abstract<-function(id, type, format, access_token, fromRange = 1, toRange = 100){
+get_abstract<-function(id, type, format, access_token, fromRange = 1){
+
+  toRange <- length(id)
 
   baseURL <- "http://ops.epo.org/3.2/rest-services/published-data/"
 
+  # Set document type endpoint
   if(type == "pub"){
-    # Search among publications
     url <- paste0(baseURL, "publication/")
-  }
-  if(type == "app"){
-    # Search among applications
+  } else if(type == "app"){
     url <- paste0(baseURL, "application/")
+  } else {
+    stop('Patent type not defined with no default')
   }
+
+  # Set id format endpoint
   if(format == "docdb"){
     url <- paste0(url, "docdb/")
-  }
-  if(format == "epodoc"){
+  } else if(format == "epodoc"){
     url <- paste0(url, "epodoc/")
+  } else{
+    stop('Id format not defined with no default')
   }
 
   # Check the number of items to retrieve
@@ -66,20 +71,21 @@ if(response$status_code == 200){
 
   if (format == 'docdb'){
 
-  #store country
-  country <- documents$`@country`
+        #store country
+        country <- documents$`@country`
 
-  #store document number
-  doc_number <- documents$`@doc-number`
+        #store document number
+        doc_number <- documents$`@doc-number`
 
-  #store kind
-  kind <- documents$`@kind`
+        #store kind
+        kind <- documents$`@kind`
 
-  #create docdb_id
-  docdb_id <- paste0(country, doc_number, kind)
+        #create docdb_id
+        docdb_id <- paste0(country, doc_number, kind)
   }
+
   if (format == 'epodoc'){
-    epodoc_id <- lapply(documents$`bibliographic-data.publication-reference.document-id`, function(x) x$`doc-number.$`[2])
+      epodoc_id <- lapply(documents$`bibliographic-data.publication-reference.document-id`, function(x) x$`doc-number.$`[2])
   }
 
   # Store abstract list
@@ -117,8 +123,8 @@ if(response$status_code == 200){
     abstracts <- data.frame(epodoc_id = unlist(epodoc_id), abstract = unlist(abstract_en))
   }
 
-  } else {
-    # Print error number
+} else {
+    # Print response error
     print(paste("Failed request, error", response$status_code))
   }
 

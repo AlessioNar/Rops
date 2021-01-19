@@ -13,11 +13,7 @@
 
 #' @export get_description
 
-get_description<-function(epodoc_id, type, access_token){
-
-  # Create header and name it
-  header <- c(paste('Bearer', access_token), "application/json")
-  names(header) <- c('Authorization', "Accept")
+get_description<-function(epodoc_id, type, access_token, eng_only = NA){
 
   baseURL <- "https://ops.epo.org/3.2/rest-services/published-data/"
 
@@ -34,9 +30,12 @@ get_description<-function(epodoc_id, type, access_token){
   # Access through the description endpoint
   request<-paste0(url, epodoc_id, "/description")
 
+  # Create header and name it
+  header <- c(paste('Bearer', access_token), "application/json")
+  names(header) <- c('Authorization', "Accept")
+
   # Make request
-  response<-GET(request,
-                add_headers(header))
+  response<-GET(request, add_headers(header))
 
   # Parse json file into list
   parsed_response<-fromJSON(content(response, "text"), flatten = TRUE)
@@ -44,8 +43,11 @@ get_description<-function(epodoc_id, type, access_token){
   # Create df containing description and language
   description_df<-as.data.frame(parsed_response$`ops:world-patent-data`$`ftxt:fulltext-documents`$`ftxt:fulltext-document`$description)
 
-  # Select only description in English language
-  description<-description_df$X.[which(description_df$X.lang == "EN")]
-
+  if(is.na(eng_only) == FALSE){
+      # Select only description in English language
+       description<-description_df$X.[which(description_df$X.lang == "EN")]
+  } else {
+       description <- description_df$X.
+  }
   return(description)
 }
