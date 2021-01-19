@@ -16,13 +16,23 @@ Retrieves abstracts of patents from either the docdb or the epodoc document numb
 
 ## get_claims
 
-Retrieves claims of a patent given the epodoc id in the form of 
+Retrieves claims of a patent given the epodoc id in the form of a character vector. At present it is limited to request the claims for one patent at the time.
 
-- get_biblio: retrieves bibliographic data of patents in the form of dataframes given the epodoc/docdb id of the patent
+## get_description
 
-- get_description: retrieves description of a patent given the epodoc id
-- get_query: builds a query to search the EPO datasets based on various criteria. See documentation for more information
-- search_patents: searches for patents within the EPO dataset. At present it allows to retrieve only the docdb code of the patents matching those criterias. Specifically, I am encountering issues with the parse_search_biblio that should allow to parse the bibliographic infromation. 
+Retrieves the description of a patent given the epodoc id in the form of a character vector. At present it is limited to request the description for one patent at the time.
+
+## get_biblio
+
+Retrieves bibliographic data of patents in the form of dataframes given the epodoc/docdb id of the patent
+
+## get_query
+
+Builds a query to search the EPO datasets based on various criteria. See documentation for more information
+
+## search_patents
+
+Searches for patents within the EPO dataset. At present it allows to retrieve only the docdb code of the patents matching those criterias. Specifically, I am encountering issues with the parse_search_biblio that should allow to parse the bibliographic information. 
 
 
 
