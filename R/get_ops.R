@@ -11,35 +11,32 @@
 #' @importFrom httr content_type
 #' @importFrom httr accept
 #' @importFrom httr content
+#' @importFrom httr header
 #' @export
 #' @examples \dontrun{
 #' search_respose <- get_ops("https://ops.epo.org/3.2/rest-services/published-data/search/?q=ct%3DCN104980769%20and%20pd%3D%2220180201%2020180203%22", access_token, raw = FALSE)
 #' }
+#' 
 
-
-get_ops <- function(url, access_token, raw = NULL, from_range = 1, to_range = 100) {
-  # Create header for request
-  header <- httr::add_headers(
-    Authorization = paste("Bearer", access_token),
-    Accept = "application/json",
-    "X-OPS-Range" = paste("items=", from_range, "-", to_range)
-  )
-  # make request
-  response <- httr::GET(url = url, add_headers(header))
-  # check response
-  if (httr::status_code(response) == 200) {
-    # extract content
-    content <- httr::content(response, as = "text")
-    # check if raw is true
-    if (raw) {
-      return(content)
-    } else {
-      # parse content
-      parsed_content <- jsonlite::fromJSON(content)
-      return(parsed_content)
-    }
+get_ops <- function(url, access_token, raw = NULL) {
+  
+  # Create header
+  header <- c(paste('Bearer', access_token), "application/json")
+  # Rename header
+  names(header) <- c('Authorization', "Accept")
+  # Make request
+  response <- httr::GET(url = url, httr::add_headers(header))
+  
+  # Check if the response is 200
+  if (httr::status_code(response) != 200) {
+    # Stop the function if the response is not 200 and return the error code and headers
+    stop(paste0(httr::status_code(response), "/n", as.character(httr::headers(response))))
   } else {
-    # return error
-    return(httr::status_code(response))
+    # Convert the json file into a list
+    if (raw == TRUE) {
+      return(httr::content(response, as = "text", encoding = "UTF-8"))
+    } else {
+      return(fromJSON(httr::content(response, "text"), flatten = TRUE))
+    }
   }
 }
