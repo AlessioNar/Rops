@@ -4,8 +4,6 @@
 #' @param url string, A single url
 #' @param access_token string, bearer token for authentication
 #' @param raw bool, r
-#' @param from_range int Initial limit of results to be returned. Default to 1
-#' @param to_range Final limit of results to be returned. Default to 100
 #' @return A list
 #' @importFrom httr GET
 #' @importFrom httr content_type
@@ -23,11 +21,11 @@
 get_ops <- function(url, access_token, raw = NULL) {
 
   # Create header
-  header <- c(paste("Bearer", access_token), "application/json")
+  headers <- c(paste("Bearer", access_token), "application/json")
   # Rename header
-  names(header) <- c("Authorization", "Accept")
+  names(headers) <- c("Authorization", "Accept")
   # Make request
-  response <- httr::GET(url = url, httr::add_headers(header))
+  response <- httr::GET(url = url, httr::add_headers(headers))
 
   # Check if the response is 200
   if (httr::status_code(response) != 200) {
