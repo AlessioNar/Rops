@@ -4,11 +4,26 @@ R client to download and parse EPO data using the Open Patent Service
 
 ## Authentication process
 
-Accessing the OPS API requires applying for an account to obtain the consumer key and the consumer secret key. In order to register for the service, register at
+In order to access the OPS API v3.2, you need to follow these steps:
 
-https://www.epo.org/searching-for-patents/data/web-services/ops.html.
+* register to the OPS (web service)[https://www.epo.org/searching-for-patents/data/web-services/ops.html]
+* create a task-specific application and gather the access information (the consumer key and the consumer secret key)
+* create a temporary token by passing the consumer key and the consumer secret key to the function `create_access_token`
 
-Then use the create_access_token function to retrieve an access token that is valid for 20 minutes and use it to make calls to the OPS API.
+This token expires each 20 minutes. 
+
+### Example usage
+
+```{r}
+library(Rops)
+
+consumer_key <- 'YOURCONSUMERKEY'
+consumer_secret_key <- 'YOURCONSUMERSECRETKEY'
+
+access_token <- create_access_token(consumer_key, consumer_secret_key)
+
+```
+
 
 ## get_abstract
 
