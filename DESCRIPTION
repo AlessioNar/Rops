@@ -10,4 +10,4 @@ License: GNU3
 Encoding: UTF-8
 LazyData: true
 Imports: httr, base64enc, jsonlite
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1

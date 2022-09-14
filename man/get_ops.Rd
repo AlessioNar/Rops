@@ -2,28 +2,27 @@
 % Please edit documentation in R/get_ops.R
 \name{get_ops}
 \alias{get_ops}
-\title{Obtain a set of urls from ops_publications}
+\title{Makes a request to the Open Patent Services API}
 \usage{
-get_ops(url, access_token, raw = NULL, fromRange = 1, toRange = 100)
+get_ops(url, access_token, raw = NULL)
 }
 \arguments{
-\item{url}{. A single url}
+\item{url}{string, A single url}
 
-\item{access_token}{bearer token for authentication}
+\item{access_token}{string, bearer token for authentication}
 
-\item{raw}{boolean value that decides whether the returned file will be in json format or as a list}
-
-\item{fromRange}{Initial limit of results to be returned. Default to 1}
-
-\item{toRange}{Final limit of results to be returned. Default to 100}
+\item{raw}{bool, r}
 }
 \value{
-A list containing a parse
+A list
 }
 \description{
-Used in conjunction with ops_iterate. Given a set of urls convert to a
-get request to retrieve the data from OPS. When the response is received extract the content to create a list.
+Makes a request to the Open Patent Services API
+and it returns the raw or parsed response
 }
 \examples{
-\dontrun{search_respose <- get_ops("https://ops.epo.org/3.2/rest-services/published-data/search/?q=ct\%3D CN104980769 \%20 and \%20 pd \%3D \%22 20180201\%2020180203\%22", access_token, raw = FALSE)}
+\dontrun{
+search_respose <- get_ops(url, access_token, raw = FALSE)
+}
+
 }

@@ -10,7 +10,7 @@ In order to access the OPS API v3.2, you need to follow these steps:
 * create a task-specific application and gather the access information (the consumer key and the consumer secret key)
 * create a temporary token by passing the consumer key and the consumer secret key to the function `create_access_token`
 
-This token expires each 20 minutes. 
+The token expires each 20 minutes. 
 
 ### Example usage
 
@@ -23,7 +23,6 @@ consumer_secret_key <- 'YOURCONSUMERSECRETKEY'
 access_token <- create_access_token(consumer_key, consumer_secret_key)
 
 ```
-
 
 ## get_abstract
 

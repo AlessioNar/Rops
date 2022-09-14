@@ -18,14 +18,24 @@
 #' }
 #'
 
-get_ops <- function(url, access_token, raw = NULL) {
+get_ops <- function(url, access_token, raw = NULL, multiple=FALSE, id=NULL) {
 
   # Create header
   headers <- c(paste("Bearer", access_token), "application/json")
   # Rename header
   names(headers) <- c("Authorization", "Accept")
-  # Make request
-  response <- httr::GET(url = url, httr::add_headers(headers))
+
+  if(multiple == TRUE){
+    
+    headers  <- c(headers, paste(id))
+    names(headers) <- c("Authorization", "Accept", "Request Body")
+    # Make a POST request
+    response <- httr::POST(url, httr::add_headers(headers = headers))
+  } else {
+    # Make a GET request
+    response <- httr::GET(url = url, httr::add_headers(headers))
+  }
+  
 
   # Check if the response is 200
   if (httr::status_code(response) != 200) {

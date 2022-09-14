@@ -29,5 +29,4 @@ search_patents <- function(title = NA, abstract = NA, titab = NA, applicant = NA
   }
 
   return(dataframe)
-
 }
