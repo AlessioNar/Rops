@@ -75,4 +75,4 @@ publication_services(type = "publication", format="epodoc", id=c('EP1000000.A1',
 
 ## Additional information
 
-* (OPS 3.2 API documentation)[http://documents.epo.org/projects/babylon/eponet.nsf/0/F3ECDCC915C9BCD8C1258060003AA712/$File/ops_v3.2_documentation_-_version_1.3.18_en.pdf]
+* [OPS 3.2 API documentation](http://documents.epo.org/projects/babylon/eponet.nsf/0/F3ECDCC915C9BCD8C1258060003AA712/$File/ops_v3.2_documentation_-_version_1.3.18_en.pdf)
