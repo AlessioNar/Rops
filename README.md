@@ -64,7 +64,7 @@ publication_services(type = "publication", format="epodoc", id='EP1000000.A1', a
 # Retrieve the equivalent of the patent publication with epodoc application number EP1000000.A1 as a list
 publication_services(type = "publication", format="epodoc", id='EP1000000.A1', access_token = access_token, what = 'equivalents')
 
-# Retrieve the full-cycle information of the patent publication with docdb number EP1000000 as a raw text
+# Retrieve the full-cycle information of the patent publication with docdb number EP1000000 as raw text
 publication_services(type = "publication", format="docdb", id='EP1000000', access_token = access_token, what = 'full-cycle', raw=TRUE)
 
 # Retrieve the abstracts of the patent publications with epodoc numbers EP1000000.A1 and US2022179620.A1 as a list
