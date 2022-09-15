@@ -24,29 +24,55 @@ access_token <- create_access_token(consumer_key, consumer_secret_key)
 
 ```
 
-## get_abstract
 
-Retrieves abstracts of patents from either the docdb or the epodoc document number. At present it works best when multiple patents are queried. The current limit for retrieval is 100 patents
+## Retrieving Patent information
 
-## get_claims
+At this stage, Rops can be used to call the OPS endpoints related to the Published-data services, through the `publication services` function:
 
-Retrieves claims of a patent given the epodoc id in the form of a character vector. At present it is limited to request the claims for one patent at the time.
-
-## get_description
-
-Retrieves the description of a patent given the epodoc id in the form of a character vector. At present it is limited to request the description for one patent at the time.
-
-## get_biblio
-
-Retrieves bibliographic data of patents in the form of dataframes given the epodoc/docdb id of the patent
-
-## get_query
-
-Builds a query to search the EPO datasets based on various criteria. See documentation for more information
-
-## search_patents
-
-Searches for patents within the EPO dataset. At present it allows to retrieve only the docdb code of the patents matching those criterias. Specifically, I am encountering issues with the parse_search_biblio that should allow to parse the bibliographic information. 
+* fulltext
+* claims
+* description
+* abstract
+* biblio
+* full-cycle
 
 
+### Example usage
 
+```{r}
+
+library(Rops)
+
+# Retrieve the abstract of the patent publication with epodoc number US2022179620.A1 as a list
+publication_services(type = "publication", format="epodoc", id='US2022179620.A1', access_token = access_token, what = 'abstract')
+
+# Retrieve the full text of the patent publication with epodoc number EP1000000.A1 as a list
+publication_services(type = "publication", format="epodoc", id='EP1000000.A1', access_token = access_token, what = 'fulltext')
+
+# Retrieve the claims of the patent publication with epodoc number EP1000000.A1 as a list
+publication_services(type = "publication", format="epodoc", id='EP1000000.A1', access_token = access_token, what = 'claims')
+
+# Retrieve the description of the patent publication with epodoc number EP1000000.A1 as a list
+publication_services(type = "publication", format="epodoc", id='EP1000000.A1', access_token = access_token, what = 'description')
+
+# Retrieve the bibliographic information of the patent publication with epodoc number EP1000000.A1 as a list
+publication_services(type = "publication", format="epodoc", id='EP1000000.A1', access_token = access_token, what = 'biblio')
+
+# Retrieve the full-cycle information of the patent publication with epodoc number EP1000000.A1 as a list
+publication_services(type = "publication", format="epodoc", id='EP1000000.A1', access_token = access_token, what = 'full-cycle')
+
+# Retrieve the equivalent of the patent publication with epodoc application number EP1000000.A1 as a list
+publication_services(type = "publication", format="epodoc", id='EP1000000.A1', access_token = access_token, what = 'equivalents')
+
+# Retrieve the full-cycle information of the patent publication with docdb number EP1000000 as a raw text
+publication_services(type = "publication", format="docdb", id='EP1000000', access_token = access_token, what = 'full-cycle', raw=TRUE)
+
+# Retrieve the abstracts of the patent publications with epodoc numbers EP1000000.A1 and US2022179620.A1 as a list
+publication_services(type = "publication", format="epodoc", id=c('EP1000000.A1', 'US2022179620.A1'), access_token = access_token, what = 'abstract')
+
+
+```
+
+## Additional information
+
+* (OPS 3.2 API documentation)[http://documents.epo.org/projects/babylon/eponet.nsf/0/F3ECDCC915C9BCD8C1258060003AA712/$File/ops_v3.2_documentation_-_version_1.3.18_en.pdf]
