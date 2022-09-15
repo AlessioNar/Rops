@@ -6,7 +6,7 @@ R client to download and parse EPO data using the Open Patent Service
 
 In order to access the OPS API v3.2, you need to follow these steps:
 
-* register to the OPS (web service)[https://www.epo.org/searching-for-patents/data/web-services/ops.html]
+* register to the OPS [web service](https://www.epo.org/searching-for-patents/data/web-services/ops.html)
 * create a task-specific application and gather the access information (the consumer key and the consumer secret key)
 * create a temporary token by passing the consumer key and the consumer secret key to the function `create_access_token`
 
