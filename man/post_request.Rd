@@ -4,17 +4,19 @@
 \alias{post_request}
 \title{Makes a POST request to the Open Patent Services API}
 \usage{
-post_request(url, access_token, raw = raw, id = NULL)
+post_request(url, access_token, id = NULL, raw = raw)
 }
 \arguments{
 \item{url}{string, A single url}
 
 \item{access_token}{string, bearer token for authentication}
 
+\item{id}{string vector, epodoc or docdb format}
+
 \item{raw}{bool, r}
 }
 \value{
-A list
+A list or a raw string
 }
 \description{
 Makes a POST request to the Open Patent Services API
@@ -22,7 +24,7 @@ and it returns the raw or parsed response
 }
 \examples{
 \dontrun{
-search_respose <- get_ops(url, access_token, raw = FALSE)
+response <- post_request(url, id, access_token, raw = FALSE)
 }
 
 }
