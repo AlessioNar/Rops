@@ -19,8 +19,8 @@
 #'
 
 post_request <- function(url, access_token, id = NULL, raw = raw) {
-  
-  # Build request body  
+
+  # Build request body
   request_body <- stringr::str_c(paste(id, collapse = ","))
   # Build headers
   headers <- c(paste("Bearer", access_token), "application/json")
