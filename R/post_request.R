@@ -2,9 +2,10 @@
 #' @description Makes a POST request to the Open Patent Services API
 #' and it returns the raw or parsed response
 #' @param url string, A single url
+#' @param id string vector, epodoc or docdb format
 #' @param access_token string, bearer token for authentication
 #' @param raw bool, r
-#' @return A list
+#' @return A list or a raw string
 #' @importFrom httr content_type
 #' @importFrom httr accept
 #' @importFrom httr content
@@ -13,16 +14,16 @@
 #' @importFrom httr headers
 #' @export post_request
 #' @examples \dontrun{
-#' search_respose <- get_ops(url, access_token, raw = FALSE)
+#' response <- post_request(url, id, access_token, raw = FALSE)
 #' }
 #'
 
-post_request <- function(url, access_token, raw = raw, id = NULL) {
+post_request <- function(url, access_token, id = NULL, raw = raw) {
   
+  # Build request body  
   request_body <- stringr::str_c(paste(id, collapse = ","))
-
+  # Build headers
   headers <- c(paste("Bearer", access_token), "application/json")
-  # Rename header
   names(headers) <- c("Authorization", "Accept")
 
   # Make the POST request
