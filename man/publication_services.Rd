@@ -10,23 +10,32 @@ publication_services(
   format,
   access_token,
   what = "fulltext",
-  raw = FALSE,
-  equilvalents = NULL
+  raw = FALSE
 )
 }
 \arguments{
-\item{type}{the type of publication to be searched. 'pub' stands for patent publications and 'app' stands for patent applications.}
+\item{id}{string or string vector, epodoc or docdb format}
+
+\item{type}{the type of publication to be searched.
+'publication' or 'application'.}
+
+\item{format}{the format of the document id to be searched.
+'epodoc' or 'docdb'.}
 
 \item{access_token}{token for authentications}
 
-\item{epodoc_id}{character, epodoc code for a patent to have returned the claims}
+\item{what}{string, the type of information to be retrieved.
+'claims', 'abstract', 'description', 'title', 'fulltext', 'full-cycle'}
+
+\item{raw}{bool, if TRUE returns the raw response}
 }
 \value{
-A character vector containing patent claims
+A list or a raw string
 }
 \description{
-Retrieve claims of a patent. It works only with the epodoc format
+Retrieve claims of a patent.
+It works only with the epodoc format
 }
 \examples{
-\dontrun{get_full_text(epodoc_id, type = 'pub', access_token))}
+\dontrun{publication_services(id = "EP1000000.A1", type = "publication", format = "epodoc", access_token = "your_access_token", raw = FALSE, what = "claims")}
 }
