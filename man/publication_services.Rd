@@ -38,4 +38,5 @@ It works only with the epodoc format
 }
 \examples{
 \dontrun{publication_services(id = "EP1000000.A1", type = "publication", format = "epodoc", access_token = "your_access_token", raw = FALSE, what = "claims")}
+\dontrun{publication_services(id = c("EP1000000.A1", "US2022179620.A1"), type = "publication", format = "epodoc", access_token = "your_access_token", raw = FALSE, what = "claims")}
 }

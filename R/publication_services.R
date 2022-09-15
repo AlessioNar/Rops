@@ -14,20 +14,21 @@
 #' 'claims', 'abstract', 'description', 'title', 'fulltext', 'full-cycle'
 #' @return A list or a raw string
 #' @examples \dontrun{publication_services(id = "EP1000000.A1", type = "publication", format = "epodoc", access_token = "your_access_token", raw = FALSE, what = "claims")}
-#' @import stringr
+#' @examples \dontrun{publication_services(id = c("EP1000000.A1", "US2022179620.A1"), type = "publication", format = "epodoc", access_token = "your_access_token", raw = FALSE, what = "claims")}
+#' @importFrom stringr str_c
 #' @export publication_services
 
-publication_services<-function(id, type, format, access_token, what = "fulltext", raw = FALSE){
+publication_services <- function(id, type, format, access_token, what = "fulltext", raw = FALSE) {
 
-    baseURL <- "https://ops.epo.org/3.2/rest-services/published-data"
+    base_url <- "https://ops.epo.org/3.2/rest-services/published-data"
 
     # If clause to check if the user supplied a string or a string array
     # if it is, use post_request if it is not, use get_request
-    if(length(id) == 1){
-        url <- stringr::str_c(baseURL, "/", type, "/", format, "/", id, "/", what)
+    if (length(id) == 1) {
+        url <- stringr::str_c(base_url, "/", type, "/", format, "/", id, "/", what)
         response <- get_request(url, access_token, raw = raw)
     } else {
-        url <- stringr::str_c(baseURL, "/", type, "/", format, "/", what)
+        url <- stringr::str_c(base_url, "/", type, "/", format, "/", what)
         response <- post_request(url, access_token, raw = raw, id = id)
     }
 
